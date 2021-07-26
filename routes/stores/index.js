@@ -66,7 +66,7 @@ router.put("/:idBookstore", async (req, res, next) => {
     const dataReceived = req.body;
     const data = Object.assign({}, dataReceived, { id: id });
     const bookstore = new Bookstore(data);
-    await bookstore.atualizar();
+    await bookstore.update();
     res.status(204);
     res.end();
   } catch (error) {

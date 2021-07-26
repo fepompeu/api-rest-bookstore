@@ -49,11 +49,11 @@ class Book {
   }
 
   delete() {
-    return Table.remover(this.id, this.bookstoreId);
+    return Table.remove(this.id, this.bookstoreId);
   }
 
   async load() {
-    const book = await Table.pegarPorId(this.id, this.bookstoreId);
+    const book = await Table.getById(this.id, this.bookstoreId);
     this.book = book.book;
     this.price = book.price;
     this.inventory = book.inventory;

@@ -45,7 +45,7 @@ router.options("/:id", (req, res) => {
 router.delete("/:id", async (req, res) => {
   const data = {
     id: req.params.id,
-    bookstore: req.bookstore.id,
+    bookstoreId: req.bookstore.id,
   };
 
   const book = new Book(data);
@@ -58,16 +58,16 @@ router.get("/:id", async (req, res, next) => {
   try {
     const data = {
       id: req.params.id,
-      bookstore: req.bookstore.id,
+      bookstoreId: req.bookstore.id,
     };
 
     const book = new Book(data);
     await book.load();
     const serializer = new Serializer(res.getHeader("Content-Type"), [
-      "preco",
-      "estoque",
-      "bookstore",
-      "dataCriacao",
+      "price",
+      "inventory",
+      "bookstoreId",
+      "CreatedAt",
       "updatedAt",
       "version",
     ]);
@@ -84,7 +84,7 @@ router.head("/:id", async (req, res, next) => {
   try {
     const data = {
       id: req.params.id,
-      bookstore: req.bookstore.id,
+      bookstoreId: req.bookstore.id,
     };
 
     const book = new Book(data);
@@ -103,7 +103,7 @@ router.put("/:id", async (req, res, next) => {
   try {
     const data = Object.assign({}, req.body, {
       id: req.params.id,
-      bookstore: req.bookstore.id,
+      bookstoreId: req.bookstore.id,
     });
 
     const book = new Book(data);
@@ -130,11 +130,11 @@ router.post("/:id/decress-inventory", async (req, res, next) => {
   try {
     const book = new Book({
       id: req.params.id,
-      bookstore: req.bookstore.id,
+      bookstoreId: req.bookstore.id,
     });
 
     await book.load();
-    book.estoque = book.estoque - req.body.quantidade;
+    book.inventory = book.inventory - req.body.value;
     await book.decressInventory();
     await book.load();
     res.set("ETag", book.version);

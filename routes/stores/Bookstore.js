@@ -28,13 +28,13 @@ class Bookstore {
   }
 
   async load() {
-    const encontrado = await TableBookstores.getById(this.id);
-    this.name = encontrado.name;
-    this.local = encontrado.local;
-    this.category = encontrado.category;
-    this.createdAt = encontrado.createdAt;
-    this.updatedAt = encontrado.updatedAt;
-    this.version = encontrado.version;
+    const res = await TableBookstores.getById(this.id);
+    this.name = res.name;
+    this.local = res.local;
+    this.category = res.category;
+    this.createdAt = res.createdAt;
+    this.updatedAt = res.updatedAt;
+    this.version = res.version;
   }
 
   async update() {

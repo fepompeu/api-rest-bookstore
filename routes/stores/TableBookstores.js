@@ -5,8 +5,8 @@ module.exports = {
   list() {
     return Model.findAll({ raw: true });
   },
-  insert(fornecedor) {
-    return Model.create(fornecedor);
+  insert(bookstore) {
+    return Model.create(bookstore);
   },
   async getById(id) {
     const encontrado = await Model.findOne({
